@@ -15,3 +15,17 @@ pub trait Can {
     /// Awaits until a frame was received or an error occurred.
     async fn receive(&mut self) -> Result<Self::Frame, Self::Error>;
 }
+
+pub trait CanTx {
+    type Frame: crate::Frame;
+    type Error: crate::Error;
+
+    async fn transmit(&mut self, frame: &Self::Frame) -> Result<(), Self::Error>;
+}
+
+pub trait CanRx {
+    type Frame: crate::Frame;
+    type Error: crate::Error;
+
+    async fn receive(&mut self) -> Result<Self::Frame, Self::Error>;
+}
